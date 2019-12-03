@@ -19,14 +19,14 @@ const app = express();
 app.use(express.json());
 
 // Get Entries
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   console.log("== Get Entries ==");
   console.log(entries);
   res.json(entries);
 });
 
 // Add Entry
-app.post("/", (req, res) => {
+app.post("/api", (req, res) => {
   if (!req.body.name || !req.body.message) return res.status(400).end();
 
   const entry = {
@@ -42,7 +42,7 @@ app.post("/", (req, res) => {
 });
 
 // Edit Entry
-app.patch("/:id", (req, res) => {
+app.patch("/api/:id", (req, res) => {
   const entry = entries.find(e => e.id == req.params.id);
   if (!entry) return res.status(404).end();
 
@@ -55,7 +55,7 @@ app.patch("/:id", (req, res) => {
 });
 
 // Delete Entry
-app.delete("/:id", (req, res) => {
+app.delete("/api/:id", (req, res) => {
   const index = entries.findIndex(e => e.id == req.params.id);
   if (index < 0) return res.status(404).end();
 
