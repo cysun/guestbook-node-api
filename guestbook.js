@@ -26,6 +26,14 @@ app.get("/", (req, res) => {
   res.json(entries);
 });
 
+// Get Entry
+app.get("/:id", (req, res) => {
+  const entry = entries.find((e) => e.id == req.params.id);
+  console.log("== Get Entry ==");
+  console.log(entry);
+  return entry ? res.json(entry) : res.status(404).end();
+});
+
 // Add Entry
 app.post("/", (req, res) => {
   console.log(req.body);
